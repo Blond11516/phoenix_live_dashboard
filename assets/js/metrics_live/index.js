@@ -220,6 +220,7 @@ class Summary {
   static initialData() { return [[], [], [], [], [], []] }
 
   static getConfig(options) {
+    console.log("test")
     return {
       class: options.kind,
       title: options.title,
