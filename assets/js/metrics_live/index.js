@@ -206,13 +206,18 @@ class Summary {
       if (this.max === null || y > this.max) { this.max = y }
       this.datasets[3].push(this.max)
 
-      this.datasets[4].push(this.total / this.count)
+      let average = this.total / this.count
+      console.log("haha")
+      console.log(average)
+      this.datasets[4].push(average)
+
+      this.datasets[5].push(Math.sqrt(Math.pow(y - average, 2)))
     })
 
     this.chart.setData(this.datasets)
   }
 
-  static initialData() { return [[], [], [], [], []] }
+  static initialData() { return [[], [], [], [], [], []] }
 
   static getConfig(options) {
     return {
@@ -244,6 +249,13 @@ class Summary {
           label: "Avg",
           fill: "rgba(0, 0, 0, .07)",
           stroke: "red",
+          dash: [10, 10],
+          ...SeriesValue(options)
+        },
+        {
+          label: "Std. dev",
+          fill: "rgba(0, 0, 0, .07)",
+          stroke: "blue",
           dash: [10, 10],
           ...SeriesValue(options)
         },
@@ -287,7 +299,7 @@ export class TelemetryChart {
   }
 
   resize(boundingBox) {
-    this.uplotChart.setSize({width: Math.max(boundingBox.width, minChartSize.width), height: minChartSize.height});
+    this.uplotChart.setSize({ width: Math.max(boundingBox.width, minChartSize.width), height: minChartSize.height });
   }
 
   pushData(measurements) {
@@ -315,7 +327,7 @@ const PhxChartComponent = {
       let newSize = chartEl.getBoundingClientRect()
       this.chart.resize(newSize)
     }))
-    
+
   },
   updated() {
     const data = Array
