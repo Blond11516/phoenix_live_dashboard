@@ -256,7 +256,7 @@ class Summary {
         {
           label: "Std. dev",
           fill: "rgba(0, 0, 0, .07)",
-          stroke: "blue",
+          stroke: "green",
           dash: [10, 10],
           ...SeriesValue(options)
         },
